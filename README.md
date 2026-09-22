@@ -1,53 +1,38 @@
 # MiHaTo Website
 
-Website doanh nghiệp MiHaTo — giới thiệu công ty, giải pháp, dự án, đào tạo, đội ngũ và kênh liên hệ.
+Corporate website source for MiHaTo.
 
-## Yêu cầu phát triển
+## Requirements
 
-- Node.js 22.13 trở lên
-- pnpm (khuyến nghị) hoặc npm
+- Node.js 22.13 or newer
+- pnpm 11.25.0
 
-## Chạy local
+## Local development
 
 ```bash
 pnpm install
 pnpm dev
 ```
 
-Hoặc:
+The local development command keeps the project's existing Vinext/Vite workflow.
+
+## Production build
 
 ```bash
-npm install
-npm run dev
-```
-
-Sau đó mở địa chỉ Vite hiển thị trong Terminal, mặc định thường là `http://localhost:5173`.
-
-## Kiểm tra trước khi đưa lên GitHub
-
-```bash
-pnpm install
 pnpm build
+pnpm start
 ```
 
-Không commit `node_modules`, file `.env`, output build, cache hoặc state local. Các mục này đã được khai báo trong `.gitignore`.
+The production build uses Next.js directly so the project can be deployed on Vercel with the Next.js preset.
 
-## Cấu trúc chính
+## Vercel
 
-- `app/`: các trang, component và nội dung website
-- `app/globals.css`: giao diện, responsive và animation
-- `public/`: logo, hình ảnh và media
-- `scripts/`: script chạy framework
-- `vite.config.ts`: cấu hình Vinext/Vite
+Import this repository into Vercel and keep:
 
-## Ngôn ngữ
+- Framework / Application Preset: Next.js
+- Root Directory: `./`
+- Build Command: project default (`pnpm run build`)
+- Output Directory: Next.js default
+- Install Command: project default (`pnpm install`)
 
-Website hỗ trợ tiếng Việt và tiếng Anh. Khi chỉnh nội dung mới, cần kiểm tra cả hai chế độ VI/EN trước khi deploy.
-
-## Nội dung công khai
-
-Chỉ sử dụng số liệu, khách hàng, dự án và thông tin thành viên đã được MiHaTo cho phép công bố. Các nội dung chưa xác nhận nên được xem là nội dung dự thảo.
-
-## Chia sẻ cho người review
-
-GitHub dùng để lưu và quản lý source code. Nếu người review chỉ cần mở website bằng trình duyệt mà không cài Node.js hay editor, hãy deploy repository lên một dịch vụ hosting phù hợp và gửi URL của bản deploy.
+No environment variables are required by the current public website.
