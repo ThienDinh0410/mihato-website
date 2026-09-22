@@ -159,7 +159,7 @@ const EN_COMPLETE: Record<string,string> = {
 };
 Object.assign(EN_TEXT, EN_MORE, EN_COMPLETE);
 const originalText = new WeakMap<Node,string>();
-function translateTree(root: ParentNode, lang:"vi"|"en") {
+function translateTree(root: HTMLElement, lang:"vi"|"en") {
   const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
   let node:Node|null;
   while((node=walker.nextNode())) {
@@ -287,7 +287,7 @@ export function BriefButton({ slug, children = "Tìm hiểu thêm" }: { slug: st
   async function send(e: React.FormEvent) {
     e.preventDefault(); setStatus("Đang gửi...");
     const r = await fetch('/api/send-brief',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,slug})});
-    const j = await r.json().catch(()=>({}));
+    const j = await r.json().catch(()=>({})) as { error?: string };
     if(r.ok){setStatus('Đã gửi. Vui lòng kiểm tra email của bạn.');} else {setStatus(j.error || 'Chưa thể gửi email. Vui lòng thử lại.');}
   }
   return <>

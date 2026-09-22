@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server';
 import { briefs } from '../../briefs';
 export async function POST(req: Request){
-  const {email,slug}=await req.json(); const b=briefs[slug];
+  const body = (await req.json()) as { email?: string; slug?: string };
+  const { email, slug } = body;
+  const b = slug ? briefs[slug] : undefined;
   if(!email || !b) return NextResponse.json({error:'Email hoặc tài liệu không hợp lệ.'},{status:400});
   const key=process.env.RESEND_API_KEY; const from=process.env.BRIEF_FROM_EMAIL;
   if(!key || !from) return NextResponse.json({error:'Chức năng gửi email đang chờ cấu hình RESEND_API_KEY và BRIEF_FROM_EMAIL.'},{status:503});
